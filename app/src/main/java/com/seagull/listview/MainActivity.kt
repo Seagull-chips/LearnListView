@@ -2,8 +2,6 @@ package com.seagull.listview
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.ListView
 
 class MainActivity : AppCompatActivity() {
@@ -15,15 +13,23 @@ class MainActivity : AppCompatActivity() {
         //adapter适配器数据源-> UI
         //ArrayAdapter Context对象：Activity对象 resource: Item的布局文件 object：传进来的数据集合
         listView.adapter =
-            ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, creatStringList())
+            ListViewAdapter(this, R.layout.itemlayout,creatLifeFataList())
+        //listView自定义布局文件
+
     }
 
-    private fun creatStringList(): List<String> {
-        val data = ArrayList<String>()
-
-        for (i in 0..100) {
-            data.add(i.toString())
+    private fun creatLifeFataList(): List<LifeData> {
+        val data = ArrayList<LifeData>()
+        repeat(4) {
+            data.add(LifeData(R.drawable.facebook, "facebook"))
+            data.add(LifeData(R.drawable.instagram, "instagram"))
+            data.add(LifeData(R.drawable.tiktok, "tiktok"))
+            data.add(LifeData(R.drawable.twitter, "twitter"))
+            data.add(LifeData(R.drawable.wechat, "wechat"))
+            data.add(LifeData(R.drawable.youtube, "youtube"))
         }
         return data
     }
 }
+
+data class LifeData(val imageId: Int, val name: String)
